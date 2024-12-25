@@ -1,4 +1,4 @@
-#!C:\Users\varsh\OneDrive\Desktop\APPIAN-IIT\venv\Scripts\python.exe
+#!C:\Users\varsh\OneDrive\Desktop\Document_Classifier\venv\Scripts\python.exe
 
 import sys
 import json
