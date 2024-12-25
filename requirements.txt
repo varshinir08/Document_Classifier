@@ -1,0 +1,6 @@
+Flask==2.0.3
+Flask-Uploads==0.2.1
+boto3==1.18.56
+spacy==3.2.0
+Tesseract==5.0
+pytesseract==0.3.8
