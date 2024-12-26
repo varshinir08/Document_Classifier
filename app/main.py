@@ -22,7 +22,7 @@ def upload_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
 
-        # Extract text from PDF
+        # Extract heading (first line) from PDF
         text = extract_text_from_pdf(filepath)
         
         # Classify document
@@ -31,12 +31,13 @@ def upload_file():
         return jsonify({
             'message': 'File processed successfully',
             'document_type': document_type,
-            'extracted_text': text[:500]  # Show a snippet of the text
+            'extracted_text': text  # Show the heading as extracted text
         })
 
     return jsonify({'error': 'Invalid file type'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 

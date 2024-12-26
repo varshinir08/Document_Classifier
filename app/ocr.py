@@ -1,17 +1,21 @@
-import boto3
+import fitz  # PyMuPDF
 
 def extract_text_from_pdf(file_path):
-    textract_client = boto3.client('textract')
+    """
+    Extracts the heading (first line) from a PDF document using PyMuPDF (fitz).
+    """
+    try:
+        # Open the PDF file
+        doc = fitz.open(file_path)
 
-    with open(file_path, 'rb') as file:
-        response = textract_client.analyze_document(
-            Document={'Bytes': file.read()},
-            FeatureTypes=['FORMS', 'TABLES']
-        )
+        # Extract text from the first page
+        page = doc.load_page(0)  # Load the first page (index 0)
+        text = page.get_text("text")  # Get text in a plain format
 
-    text = ''
-    for block in response['Blocks']:
-        if block['BlockType'] == 'LINE':
-            text += block['Text'] + '\n'
+        # Extract the first line (heading)
+        first_line = text.split('\n')[0]
+
+        return first_line if first_line else "No heading found in the document."
     
-    return text
+    except Exception as e:
+        return f"Error during text extraction: {str(e)}"
